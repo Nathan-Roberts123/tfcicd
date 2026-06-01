@@ -29,12 +29,13 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: ${{ env.TF_VERSION }}
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: "Terraform Init"
         run: terraform init
 
-      - name: "Terraform Plan Destroy"
-        run: terraform plan -destroy -out=tfplan-destroy
+      # - name: "Terraform Plan Destroy"
+      #   run: terraform plan -destroy -out=tfplan-destroy
 
       - name: "Terraform Apply Destroy"
-        run: terraform apply -auto-approve tfplan-destroy
+        run: terraform apply -auto-approve
